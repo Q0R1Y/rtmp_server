@@ -16,9 +16,9 @@ class RssAmf0Object;
 /**
 * any amf0 value.
 * 2.1 Types Overview
-* value-type = number-type | boolean-type | string-type | object-type 
-* 		| null-marker | undefined-marker | reference-type | ecma-array-type 
-* 		| strict-array-type | date-type | long-string-type | xml-document-type 
+* value-type = number-type | boolean-type | string-type | object-type
+* 		| null-marker | undefined-marker | reference-type | ecma-array-type
+* 		| strict-array-type | date-type | long-string-type | xml-document-type
 * 		| typed-object-type
 */
 struct RssAmf0Any
@@ -27,7 +27,7 @@ struct RssAmf0Any
 
 	RssAmf0Any();
 	virtual ~RssAmf0Any();
-	
+
 	virtual bool is_string();
 	virtual bool is_boolean();
 	virtual bool is_number();
@@ -130,13 +130,13 @@ private:
 public:
 	RssUnSortedHashtable();
 	virtual ~RssUnSortedHashtable();
-	
+
 	virtual int size();
 	virtual void clear();
 	virtual std::string key_at(int index);
 	virtual RssAmf0Any* value_at(int index);
 	virtual void set(std::string key, RssAmf0Any* value);
-	
+
 	virtual RssAmf0Any* get_property(std::string name);
 	virtual RssAmf0Any* ensure_property_string(std::string name);
 	virtual RssAmf0Any* ensure_property_number(std::string name);
@@ -156,7 +156,7 @@ public:
 
 	RssAmf0Object();
 	virtual ~RssAmf0Object();
-	
+
 	virtual int size();
 	virtual std::string key_at(int index);
 	virtual RssAmf0Any* value_at(int index);
@@ -183,7 +183,7 @@ public:
 
 	RssARssAmf0EcmaArray();
 	virtual ~RssARssAmf0EcmaArray();
-	
+
 	virtual int size();
 	virtual void clear();
 	virtual std::string key_at(int index);
@@ -282,7 +282,7 @@ extern int rss_amf0_get_ecma_array_size(RssARssAmf0EcmaArray* arr);
 /**
 * convert the any to specified object.
 * @return T*, the converted object. never NULL.
-* @remark, user must ensure the current object type, 
+* @remark, user must ensure the current object type,
 * 		or the covert will cause assert failed.
 */
 template<class T>

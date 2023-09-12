@@ -26,16 +26,16 @@ struct RssRequest
 	std::string pageUrl;
 	std::string swfUrl;
 	double objectEncoding;
-	
+
 	std::string schema;
 	std::string vhost;
 	std::string port;
 	std::string app;
 	std::string stream;
-	
+
 	RssRequest();
 	virtual ~RssRequest();
-	
+
 	/**
 	* disconvery vhost/app from tcUrl.
 	*/
@@ -49,7 +49,7 @@ struct RssRequest
 struct RssResponse
 {
 	int stream_id;
-	
+
 	RssResponse();
 	virtual ~RssResponse();
 };
@@ -95,7 +95,7 @@ public:
 	virtual int on_bw_done();
 	/**
 	* recv some message to identify the client.
-	* @stream_id, client will createStream to play or publish by flash, 
+	* @stream_id, client will createStream to play or publish by flash,
 	* 		the stream_id used to response the createStream request.
 	* @type, output the client type.
 	*/
@@ -106,7 +106,7 @@ public:
 	virtual int set_chunk_size(int chunk_size);
 	/**
 	* when client type is play, response with packets:
-	* StreamBegin, 
+	* StreamBegin,
 	* onStatus(NetStream.Play.Reset), onStatus(NetStream.Play.Start).,
 	* |RtmpSampleAccess(false, false),
 	* onStatus(NetStream.Data.Start).

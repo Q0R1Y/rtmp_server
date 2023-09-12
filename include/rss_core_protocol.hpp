@@ -79,7 +79,7 @@ public:
 	virtual void set_send_timeout(int timeout_ms);
 	/**
 	* recv a message with raw/undecoded payload from peer.
-	* the payload is not decoded, use rss_rtmp_expect_message<T> if requires 
+	* the payload is not decoded, use rss_rtmp_expect_message<T> if requires
 	* specifies message.
 	* @pmsg, user must free it. NULL if not success.
 	* @remark, only when success, user can use and must free the pmsg.
@@ -115,7 +115,7 @@ private:
 	*/
 	virtual int read_basic_header(char& fmt, int& cid, int& bh_size);
 	/**
-	* read the chunk message header(timestamp, payload_length, message_type, stream_id) 
+	* read the chunk message header(timestamp, payload_length, message_type, stream_id)
 	* from chunk stream and save to RssChunkStream.
 	* @mh_size return the chunk message header size, to remove the used bytes when finished.
 	*/
@@ -153,13 +153,13 @@ struct RssMessageHeader
 	* bytes are set in big-endian format.
 	*/
 	int32_t stream_id;
-	
+
 	/**
 	* Four-byte field that contains a timestamp of the message.
 	* The 4 bytes are packed in the big-endian order.
 	*/
 	int32_t timestamp;
-	
+
 	RssMessageHeader();
 	virtual ~RssMessageHeader();
 
@@ -238,9 +238,9 @@ public:
 	* only update the context when message canbe decoded.
 	*/
 	virtual bool can_decode() = 0;
-/**
-* encode functions.
-*/
+	/**
+	* encode functions.
+	*/
 public:
 	/**
 	* get the perfered cid(chunk stream id) which sendout over.
@@ -270,9 +270,9 @@ public:
 	virtual ~RssCommonMessage();
 public:
 	virtual bool can_decode();
-/**
-* decode functions.
-*/
+	/**
+	* decode functions.
+	*/
 public:
 	/**
 	* decode packet from message payload.
@@ -283,9 +283,9 @@ public:
 	* @remark, user never free the pkt, the message will auto free it.
 	*/
 	virtual RssPacket* get_packet();
-/**
-* encode functions.
-*/
+	/**
+	* encode functions.
+	*/
 public:
 	/**
 	* get the perfered cid(chunk stream id) which sendout over.
@@ -320,7 +320,7 @@ private:
 		int size;
 		int perfer_cid;
 		int shared_count;
-		
+
 		RssSharedPtr();
 		virtual ~RssSharedPtr();
 	};
@@ -365,18 +365,18 @@ protected:
 public:
 	RssPacket();
 	virtual ~RssPacket();
-/**
-* decode functions.
-*/
+	/**
+	* decode functions.
+	*/
 public:
 	/**
 	* subpacket must override to decode packet from stream.
 	* @remark never invoke the super.decode, it always failed.
 	*/
 	virtual int decode(RssStream* stream);
-/**
-* encode functions.
-*/
+	/**
+	* encode functions.
+	*/
 public:
 	virtual int get_perfer_cid();
 	virtual int get_payload_length();
@@ -388,7 +388,7 @@ public:
 	/**
 	* the subpacket can override this encode,
 	* for example, video and audio will directly set the payload withou memory copy,
-	* other packet which need to serialize/encode to bytes by override the 
+	* other packet which need to serialize/encode to bytes by override the
 	* get_size and encode_packet.
 	*/
 	virtual int encode(int& size, char*& payload);
@@ -888,7 +888,7 @@ protected:
 // 3.7. User Control message
 enum SrcPCUCEventType
 {
-	 // generally, 4bytes event-data
+	// generally, 4bytes event-data
 	SrcPCUCStreamBegin 		= 0x00,
 	SrcPCUCStreamEOF 			= 0x01,
 	SrcPCUCStreamDry 			= 0x02,
@@ -906,7 +906,7 @@ enum SrcPCUCEventType
 * StreamIsRecorded(=4)		4-bytes stream ID
 * PingRequest(=6)			4-bytes timestamp local server time
 * PingResponse(=7)			4-bytes timestamp received ping request.
-* 
+*
 * 3.7. User Control message
 * +------------------------------+-------------------------
 * | Event Type ( 2- bytes ) | Event Data
@@ -948,37 +948,41 @@ int rss_rtmp_expect_message(RssProtocol* protocol, RssCommonMessage** pmsg, T** 
 {
 	*pmsg = NULL;
 	*ppacket = NULL;
-	
+
 	int ret = ERROR_SUCCESS;
-	
-	while (true) {
+
+	while (true)
+	{
 		RssCommonMessage* msg = NULL;
-		if ((ret = protocol->recv_message(&msg)) != ERROR_SUCCESS) {
+		if ((ret = protocol->recv_message(&msg)) != ERROR_SUCCESS)
+		{
 			rss_error("recv message failed. ret=%d", ret);
 			return ret;
 		}
 		rss_verbose("recv message success.");
-		
-		if ((ret = msg->decode_packet()) != ERROR_SUCCESS) {
+
+		if ((ret = msg->decode_packet()) != ERROR_SUCCESS)
+		{
 			delete msg;
 			rss_error("decode message failed. ret=%d", ret);
 			return ret;
 		}
-		
+
 		T* pkt = dynamic_cast<T*>(msg->get_packet());
-		if (!pkt) {
+		if (!pkt)
+		{
 			delete msg;
-			rss_trace("drop message(type=%d, size=%d, time=%d, sid=%d).", 
-				msg->header.message_type, msg->header.payload_length,
-				msg->header.timestamp, msg->header.stream_id);
+			rss_trace("drop message(type=%d, size=%d, time=%d, sid=%d).",
+			          msg->header.message_type, msg->header.payload_length,
+			          msg->header.timestamp, msg->header.stream_id);
 			continue;
 		}
-		
+
 		*pmsg = msg;
 		*ppacket = pkt;
 		break;
 	}
-	
+
 	return ret;
 }
 

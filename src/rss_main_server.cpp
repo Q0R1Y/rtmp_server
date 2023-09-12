@@ -9,10 +9,10 @@ int main(int argc, char** argv){
 	int ret = ERROR_SUCCESS;
 	
 	if (argc <= 1) {
-		printf(RTMP_SIG_RSS_NAME" "RTMP_SIG_RSS_VERSION
+		printf(RTMP_SIG_RSS_NAME " " RTMP_SIG_RSS_VERSION
 			"Usage: %s <listen_port>\n" 
-			RTMP_SIG_RSS_URL"\n"
-			"Email: "RTMP_SIG_RSS_EMAIL"\n",
+			RTMP_SIG_RSS_URL "\n"
+			"Email: " RTMP_SIG_RSS_EMAIL "\n",
 			argv[0]);
 		exit(1);
 	}

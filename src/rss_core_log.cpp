@@ -23,7 +23,7 @@ private:
 	{
 	private:
 		// %d-%02d-%02d %02d:%02d:%02d.%03d
-		#define DATE_LEN 24
+#define DATE_LEN 24
 		char time_data[DATE_LEN];
 	public:
 		DateTime();
@@ -59,21 +59,23 @@ const char* LogContext::DateTime::format_time()
 {
 	// clock time
 	timeval tv;
-	if (gettimeofday(&tv, NULL) == -1) {
+	if (gettimeofday(&tv, NULL) == -1)
+	{
 		return "";
 	}
 	// to calendar time
 	struct tm* tm;
-	if ((tm = localtime(&tv.tv_sec)) == NULL) {
+	if ((tm = localtime(&tv.tv_sec)) == NULL)
+	{
 		return "";
 	}
-	
+
 	// log header, the time/pid/level of log
 	// reserved 1bytes for the new line.
-	snprintf(time_data, DATE_LEN, "%d-%02d-%02d %02d:%02d:%02d.%03d", 
-		1900 + tm->tm_year, 1 + tm->tm_mon, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec, 
-		(int)(tv.tv_usec / 1000));
-		
+	snprintf(time_data, DATE_LEN, "%d-%02d-%02d %02d:%02d:%02d.%03d",
+	         1900 + tm->tm_year, 1 + tm->tm_mon, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec,
+	         (int)(tv.tv_usec / 1000));
+
 	return time_data;
 }
 

@@ -31,7 +31,7 @@ void RssBuffer::erase(int size)
 void RssBuffer::append(char* bytes, int size)
 {
 	std::vector<char> vec(bytes, bytes + size);
-	
+
 	data.insert(data.end(), vec.begin(), vec.end());
 }
 
@@ -41,17 +41,19 @@ int RssBuffer::ensure_buffer_bytes(RssSocket* skt, int required_size)
 
 	rss_assert(required_size >= 0);
 
-	while (size() < required_size) {
+	while (size() < required_size)
+	{
 		char buffer[SOCKET_READ_SIZE];
-		
+
 		ssize_t nread;
-		if ((ret = skt->read(buffer, SOCKET_READ_SIZE, &nread)) != ERROR_SUCCESS) {
+		if ((ret = skt->read(buffer, SOCKET_READ_SIZE, &nread)) != ERROR_SUCCESS)
+		{
 			return ret;
 		}
-		
+
 		rss_assert((int)nread > 0);
 		append(buffer, (int)nread);
 	}
-	
+
 	return ret;
 }

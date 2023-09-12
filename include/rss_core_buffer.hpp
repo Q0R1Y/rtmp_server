@@ -8,7 +8,7 @@
 class RssSocket;
 
 /**
-* the buffer provices bytes cache for protocol. generally, 
+* the buffer provices bytes cache for protocol. generally,
 * protocol recv data from socket, put into buffer, decode to RTMP message.
 * protocol encode RTMP message to bytes, put into buffer, send to socket.
 */
