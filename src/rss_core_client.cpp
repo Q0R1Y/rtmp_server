@@ -209,7 +209,7 @@ int RssClient::streaming_play(RssSource* source)
 		// reportable
 		if (server->can_report(reported_time, report_time))
 		{
-			rss_trace("play report, time=%"PRId64", ctl_msg_ret=%d, msgs=%d", report_time, ctl_msg_ret, count);
+			rss_trace("play report, time=%" PRId64 ", ctl_msg_ret=%d, msgs=%d", report_time, ctl_msg_ret, count);
 		}
 
 		if (count <= 0)

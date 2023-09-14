@@ -110,7 +110,7 @@ int RssSource::on_meta_data(RssCommonMessage* msg, RssOnMetaDataPacket* metadata
 	int ret = ERROR_SUCCESS;
 
 	metadata->metadata->set("server",
-	                        new RssAmf0String(RTMP_SIG_RSS_NAME""RTMP_SIG_RSS_VERSION));
+	                        new RssAmf0String(RTMP_SIG_RSS_NAME"" RTMP_SIG_RSS_VERSION));
 
 	// encode the metadata to payload
 	int size = metadata->get_payload_length();

@@ -22,7 +22,7 @@ objs/src/%.o : src/%.cpp
 
 rtmp_server: $(OBJS)
 	mkdir -p $(dir $@)
-	$(LINK)  -o objs/rtmp_server $(OBJS) objs/st-1.9/obj/libst.a -ldl
+	$(LINK)  -o $@ $(OBJS) objs/st-1.9/obj/libst.a -ldl
 
 clean: 
 	(cd objs; rm -rf src rtmp_server)

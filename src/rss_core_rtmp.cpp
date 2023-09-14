@@ -290,7 +290,7 @@ int RssRtmp::response_connect_app(RssRequest* req)
 	RssCommonMessage* msg = new RssCommonMessage();
 	RssConnectAppResPacket* pkt = new RssConnectAppResPacket();
 
-	pkt->props->set("fmsVer", new RssAmf0String("FMS/"RTMP_SIG_FMS_VER));
+	pkt->props->set("fmsVer", new RssAmf0String("FMS/" RTMP_SIG_FMS_VER));
 	pkt->props->set("capabilities", new RssAmf0Number(127));
 	pkt->props->set("mode", new RssAmf0Number(1));
 
