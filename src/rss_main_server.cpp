@@ -6,6 +6,8 @@
 #include <stdio.h>
 
 int main(int argc, char** argv){
+	log_redir();
+
 	int ret = ERROR_SUCCESS;
 	
 	if (argc <= 1) {

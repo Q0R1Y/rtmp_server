@@ -28,6 +28,14 @@ public:
 // user must implements the LogContext and define a global instance.
 extern ILogContext* log_context;
 
+#if 1
+#define log_redir() freopen("log","w",stdout);
+#endif
+
+#if 0
+#define log_redir()
+#endif
+
 // donot print method
 #if 0
 #define rss_verbose(msg, ...) printf("[%s][%d][verbs] ", log_context->format_time(), log_context->get_id());printf(msg, ##__VA_ARGS__);printf("\n")
@@ -51,7 +59,7 @@ extern ILogContext* log_context;
 #define rss_error(msg, ...)   printf("[%s][%d][error][%s] ", log_context->format_time(), log_context->get_id(), __PRETTY_FUNCTION__);printf(msg, ##__VA_ARGS__);printf(" errno=%d(%s)", errno, strerror(errno));printf("\n")
 #endif
 
-#if 1
+#if 0
 #undef rss_verbose
 #define rss_verbose(msg, ...) (void)0
 #endif

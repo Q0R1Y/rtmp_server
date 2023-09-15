@@ -1,4 +1,5 @@
+.vscode/
 *.o
 *.mp4
-log
+*log
 rtmp_server
